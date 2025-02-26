@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/main.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <header class="header">
+      <div class="icon">
+        <div class="text">Gmail</div>
+        <div class="text">이미지</div>
+        <img
+          src="img/experiment_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png"
+          alt="Experiment Icon"
+        />
+        <img
+          src="img/apps_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png"
+          alt="Apps Icon"
+        />
+        <div class="list"></div>
+      </div>
+    </header>
+
+    <main class="content">
+        <div class="main">
+          <img src="img/google_logo.svg" alt="Google Logo" class="logo" />
+          <div class="search-bar">
+            <img
+              src="img/search_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png"
+              alt="Search"
+              class="icon search-icon"
+            />
+            <input
+              type="text"
+              class="search-input"
+              placeholder="Google 검색 또는 URL 입력"
+            />
+            <img src="img/mic.svg" alt="Mic" class="icon mic-icon" />
+            <img src="img/camera.svg" alt="Camera" class="icon camera-icon" />
+          </div>
+        </div>
+      </main>
+      
+      <div id="shortcuts-container" class="shortcuts-container">
+        <!-- 기본 바로가기 -->
+        <div class="shortcut">
+          <img src="img/add_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png" alt="Chrome Icon" />
+          <div>Chrome 웹 스토어</div>
+        </div>
+  
+        <!-- 바로가기 추가 버튼 -->
+        <div class="shortcut add-shortcut" onclick="openShortcutModal()">
+          <img src="img/add_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png" alt="Add Icon" />
+          <div>바로가기 추가</div>
+        </div>
+      </div>
+    </main>
+  
+    <!-- 바로가기 추가 모달 -->
+    <div id="shortcut-modal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <span class="close" onclick="closeShortcutModal()">&times;</span>
+        <h2>바로가기 추가</h2>
+        <form id="shortcut-form">
+          <label for="shortcut-name">이름:</label>
+          <input type="text" id="shortcut-name" placeholder="사이트 이름" required />
+          <label for="shortcut-url">URL:</label>
+          <input type="url" id="shortcut-url" placeholder="사이트 URL" required />
+          <button type="submit">추가</button>
+        </form>
+      </div>
+    </div>
+  
+    <footer class="footer">
+      <!-- Footer Content -->
+    </footer>
+  
+    <script>
+      const shortcutsContainer = document.getElementById("shortcuts-container");
+  
+      function openShortcutModal() {
+        document.getElementById("shortcut-modal").style.display = "block";
+      }
+  
+      function closeShortcutModal() {
+        document.getElementById("shortcut-modal").style.display = "none";
+      }
+  
+      document
+        .getElementById("shortcut-form")
+        .addEventListener("submit", (event) => {
+          event.preventDefault();
+          const name = document.getElementById("shortcut-name").value;
+          const url = document.getElementById("shortcut-url").value;
+  
+          // 새로운 바로가기 추가
+          const shortcut = document.createElement("div");
+          shortcut.className = "shortcut";
+          shortcut.innerHTML = `
+            <a href="${url}" target="_blank">
+              <img src="./img/default_icon.svg" alt="${name}" />
+              <div>${name}</div>
+            </a>
+          `;
+  
+          shortcutsContainer.insertBefore(
+            shortcut,
+            shortcutsContainer.lastElementChild
+          );
+  
+          // Clear form and close modal
+          document.getElementById("shortcut-name").value = "";
+          document.getElementById("shortcut-url").value = "";
+          closeShortcutModal();
+        });
+    </script>
+  
+</html>
